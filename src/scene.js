@@ -16,7 +16,7 @@ export const scene = new Scene(engine);
 scene.environmentTexture = new HDRCubeTexture("src/textures/studio_small_01_1k.hdr",scene,128, false, true, false, true);
 scene.clearColor = new Color4(0.7, 0.4, 0.3)
 
-scene.enablePhysics(new Vector3(0, -1, 0), new AmmoJSPlugin(true, Ammo));
+scene.enablePhysics(new Vector3(-0.1, -1.5, 0), new AmmoJSPlugin(true, Ammo));
 
 window.addEventListener("resize", function () {
     engine.resize();

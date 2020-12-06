@@ -43,7 +43,9 @@ cloth.physicsImpostor = new PhysicsImpostor(cloth, PhysicsImpostor.ClothImpostor
     pressure: 100000
 }, scene);
 
-cloth.physicsImpostor.addAnchor(box1.physicsImpostor, 0, 0, 0.3, true);
-cloth.physicsImpostor.addAnchor(box2.physicsImpostor, 1, 0, 0.3, true);
-cloth.physicsImpostor.addAnchor(box3.physicsImpostor, 1, 1, 0.05, true);
-cloth.physicsImpostor.addAnchor(box4.physicsImpostor, 0, 1, 0.05, true);
+cloth.physicsImpostor.addAnchor(box1.physicsImpostor, 0, 0, 0.2, true);
+cloth.physicsImpostor.addAnchor(box2.physicsImpostor, 1, 0, 0.2, true);
+cloth.physicsImpostor.addAnchor(box3.physicsImpostor, 1, 1, 0.01, true);
+cloth.physicsImpostor.addAnchor(box4.physicsImpostor, 0, 1, 0.01, true);
+
+//setTimeout(()=>{box3.physicsImpostor.dispose(); box4.physicsImpostor.dispose();}, 100)
