@@ -58,7 +58,7 @@ const targetPositions = [
 const rotation = JSON.parse("{\"x\":-0.37799809749480523,\"y\":3.1574913154339828,\"z\":1.5707963267948966}");
 const position = JSON.parse("{\"x\":0.07271264870386993,\"y\":-4.328710076664636,\"z\":7.187777049860184}");
 
-camera.position = new Vector3(position.x, position.y - 1, position.z);
+camera.position = new Vector3(position.x, position.y, position.z - 0.7);
 camera.rotation = new Vector3(rotation.x, rotation.y, rotation.z);
 
 //camera.setTarget(cloth.position);
@@ -79,12 +79,32 @@ const controller = {progress: 0, enabled: true, m: 2.5};
 
 let progress1 = 0;
 let progress2 = 0;
-cloth.material.albedoColor = new Color3(0, 1, 0.2);
+let index = 0;
+let colors = [
+    new Color3(0.216, 0.31, 0.647),
+    new Color3(0.537, 0.824, 0.365),
+    new Color3(0.69, 0.024, 0.137),
+    new Color3(0.82, 0.69, 0.412),
+    new Color3(0.831, 0.635, 0.678)
+
+]
+
+let sceneColors = colors.map(color => { return new Color3(1 -  0.3/color.r, 1-0.3/color.g, 1-0.3/color.b)});
+const initialColor = new Color3(1-colors[0].r, 1-colors[0].g,1-colors[0].b)
+cloth.material.albedoColor = colors[0];
+scene.clearColor = new Color4(1-colors[0].r*0.5,1-colors[0].g*0.5,1-colors[0].b*0.5)
 //scene.clearColor = new Color4(0.7, 0.4, 0.3)
+
+
 function animate() {
     const {progress} = controller;
-    scene.clearColor = new Color4(0.7 - ( 0.5 * progress / 100), 0.4 + ( 0.2 * progress / 100), 0.3);
-    cloth.material.albedoColor = new Color3(progress / 100, 1 - (progress / 100 * 0.5), 0.2 + (progress / 100 * 0.1));
+
+    const currentR = Math.abs(colors[index].r - (colors[index-1].r) * progress / 100);
+    const currentG = Math.abs(colors[index].g - (colors[index-1].g) * progress / 100);
+    const currentB = Math.abs(colors[index].b - (colors[index-1].b) * progress / 100);
+
+    scene.clearColor = new Color4(1-currentR*0.5, 1-currentG*0.5, 1-currentB*0.5);
+    cloth.material.albedoColor = new Color3(currentR, currentG, currentB);
 
     if(progress > 0 && progress < 20){
         progress1 = progress * 2.5;
@@ -126,6 +146,7 @@ function animate() {
 
 button.onclick = function () {
     if(controller.enabled) {
+        index += 1;
         controller.enabled = false;
         controller.m = 0;
         if (controller.progress < 1) {
