@@ -20,11 +20,11 @@ cloth.rotation.x = Math.PI / 2;
 
 const mat = new PBRMaterial("pbr", scene);
 
-mat.alpha = 0.2;
+mat.alpha = 0.15;
 mat.alphaMode = 3;
 mat.albedoColor = new Color3.Yellow();
-mat.environmentIntensity = 0.8
-mat.sheen.isEnabled = true;
+mat.environmentIntensity = 0.35
+mat.sheen.isEnabled = false;
 mat.metallic = 0;
 mat.albedoTexture = new Texture("src/textures/Fabric001_2K_Color.jpg", scene);
 
