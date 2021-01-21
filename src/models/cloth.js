@@ -6,13 +6,12 @@ import {
     PhysicsImpostor,
     Texture,
     Color3,
-    MeshBuilder, StandardMaterial, PBRBaseSimpleMaterial, PBRBaseMaterial,
+    MeshBuilder
 } from "@babylonjs/core";
-import {PBRSheenConfiguration} from "@babylonjs/core/Materials/PBR/pbrSheenConfiguration";
 
 export const cloth = MeshBuilder.CreateGround("cloth", {
     width: config.cloth.width,
-    height: config.cloth.height ,
+    height: config.cloth.height,
     subdivisions: 32
 }, scene)
 
@@ -27,12 +26,7 @@ mat.environmentIntensity = 0.35
 mat.sheen.isEnabled = false;
 mat.metallic = 0;
 mat.albedoTexture = new Texture("src/textures/Fabric001_2K_Color.jpg", scene);
-
 mat.backFaceCulling = false;
-//
-//mat.bumpTexture = new Texture("src/textures/Fabric001_2K_Displacement.jpg", scene);
-//mat.reflectionTexture = new Texture("src/textures/Fabric001_2K_Roughness.jpg", scene);
-
 
 cloth.material = mat;
 
@@ -47,5 +41,3 @@ cloth.physicsImpostor.addAnchor(box1.physicsImpostor, 0, 0, 0.2, true);
 cloth.physicsImpostor.addAnchor(box2.physicsImpostor, 1, 0, 0.2, true);
 cloth.physicsImpostor.addAnchor(box3.physicsImpostor, 1, 1, 0.01, true);
 cloth.physicsImpostor.addAnchor(box4.physicsImpostor, 0, 1, 0.01, true);
-
-//setTimeout(()=>{box3.physicsImpostor.dispose(); box4.physicsImpostor.dispose();}, 100)
